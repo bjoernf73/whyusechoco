@@ -1,63 +1,76 @@
-# all your chocolatey packages in one place
-$apps=@(
-    '1password',
-    'adb',
-    'audacity',
-    'azure-cli',
-    'bambustudio',
-    'banksiagui',
-    'brave',
-    'chocolatey',
-    'chocolatey-compatibility.extension',
-    'chocolatey-core.extension',
-    'chocolatey-dotnetfx.extension',
-    'chocolatey-isomount.extension',
-    'chocolatey-visualstudio.extension',
-    'chocolatey-windowsupdate.extension',
-    'Cinebench.exe',
-    'cpu-z',
-    'dotnetfx',
-    'dsc',
-    'ffmpeg',
-    'filezilla',
-    'gimp',
-    'git',
-    'go',
-    'googlechrome',
-    'googleearthpro',
-    'gpg4win',
-    'lc0-cuda',
-    'lmstudio',
-    'microsoftazurestorageexplorer',
-    'mkvtoolnix',
-    'mobaxterm',
-    'nmap',
-    'nordvpn',
-    'notepadplusplus.install',
-    'obs',
-    'obs-studio',
-    'oh-my-posh',
-    'packer',
-    'python3',
-    'python312',
-    'python313',
-    'rufus',
-    'scap-compliance-checker',
-    'spotify',
-    'steam',
-    'stigviewer',
-    'stockfish',
-    'terraform',
-    'tor-browser',
-    'vlc',
-    'vmrc',
-    'vscode',
-    'webview2-runtime', 
-    'windows-adk',
-    'windows-adk-oscdimg'
-)
+try{
+    if(
+        $false -eq ({
+            $current = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent(); 
+            $current.IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+        })){
+        throw "You're not Administrator - elevate and try again"
+    }
 
-foreach ($app in $apps) {
-    choco upgrade $app -y 
+    # all your chocolatey packages in one place
+    $apps=@(
+        '1password',
+        'adb',
+        'audacity',
+        'azure-cli',
+        'bambustudio',
+        'banksiagui',
+        'brave',
+        'chocolatey',
+        'chocolatey-compatibility.extension',
+        'chocolatey-core.extension',
+        'chocolatey-dotnetfx.extension',
+        'chocolatey-isomount.extension',
+        'chocolatey-visualstudio.extension',
+        'chocolatey-windowsupdate.extension',
+        'Cinebench.exe',
+        'cpu-z',
+        'dotnetfx',
+        'dsc',
+        'ffmpeg',
+        'filezilla',
+        'gimp',
+        'git',
+        'go',
+        'googlechrome',
+        'googleearthpro',
+        'gpg4win',
+        'lc0-cuda',
+        'lmstudio',
+        'microsoftazurestorageexplorer',
+        'mkvtoolnix',
+        'mobaxterm',
+        'nmap',
+        'nordvpn',
+        'notepadplusplus.install',
+        'obs',
+        'obs-studio',
+        'oh-my-posh',
+        'packer',
+        'python3',
+        'python312',
+        'python313',
+        'rufus',
+        'scap-compliance-checker',
+        'spotify',
+        'steam',
+        'stigviewer',
+        'stockfish',
+        'terraform',
+        'tor-browser',
+        'vlc',
+        'vmrc',
+        'vscode',
+        'webview2-runtime', 
+        'windows-adk',
+        'windows-adk-oscdimg'
+    )
+
+    foreach ($app in $apps) {
+        choco upgrade $app -y 
+    }
+    # you may list all installed packages with 'choco list'
 }
-# you may list all installed packages with 'choco list'
+catch{
+    $PSCmdlet.ThrowTerminatingError($_)
+}
