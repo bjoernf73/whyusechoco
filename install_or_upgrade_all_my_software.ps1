@@ -1,9 +1,5 @@
 try{
-    if(
-        $false -eq ({
-            $current = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent(); 
-            $current.IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
-        })){
+    if($false -eq ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
         throw "You're not Administrator - elevate and try again"
     }
 
