@@ -1,3 +1,5 @@
+[CmdletBinding()]
+param()
 try{
     if($false -eq ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){
         throw "You're not Administrator - elevate and try again"
